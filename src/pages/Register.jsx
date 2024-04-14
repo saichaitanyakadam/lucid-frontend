@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookie from "js-cookie";
 
 const Register = () => {
   const accessToken = Cookie.get("accessToken");
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
@@ -20,7 +21,8 @@ const Register = () => {
           password: creds.password,
         }
       );
-      console.log(data);
+      toast.success(data.message);
+      navigate("/login");
     } catch (error) {
       console.error(error);
       toast.error(error?.response?.data?.message);
