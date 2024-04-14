@@ -1,7 +1,8 @@
 import { Outlet, Navigate } from "react-router-dom";
+import Cookie from "js-cookie";
 const ProtectedRoute = () => {
-  const login = true;
-  return login ? <Outlet /> : <Navigate to="/login" />;
+  const accessToken = Cookie.get("accessToken");
+  return accessToken ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
